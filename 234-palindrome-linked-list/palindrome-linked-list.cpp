@@ -8,29 +8,31 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
- #include<vector>
 class Solution {
 public:
-    bool checkpalindrome(vector<int> arr){
-     int n=arr.size();
-     int s=0;
-     int e=n-1;
-     while(s<=e){
-         if(arr[s]!=arr[e]){
-             return 0;
-         }
-         s++;
-         e--;
-     }
-     return 1;
+    vector<int> listtoarray(ListNode* head){
+        vector<int>arr;
+        while(head!=NULL){
+            arr.push_back(head->val);
+            head=head->next;
+        }
+        return arr;
     }
     bool isPalindrome(ListNode* head) {
-        ListNode*temp=head;
-        vector<int> arr;
-        while(temp!=NULL){
-            arr.push_back(temp->val);
-            temp=temp->next;
+        if(head==NULL){
+            return false;
         }
-       return checkpalindrome(arr);
+        vector<int>arr=listtoarray(head);
+        int s=0;
+        int e=arr.size()-1;
+        while(s<e){
+        if(arr[s]==arr[e]){
+            s++;
+            e--;
+        }else{
+            return false;
+        }
+        }
+        return true;
     }
 };
